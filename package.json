@@ -1,0 +1,17 @@
+{
+  "name": "lottery",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "drlappiess",
+  "license": "MIT",
+  "dependencies": {
+    "@truffle/hdwallet-provider": "^2.0.3",
+    "dotenv": "^16.0.0",
+    "ganache": "^7.0.2",
+    "solc": "^0.8.12",
+    "web3": "^1.7.0"
+  },
+  "devDependencies": {
+    "mocha": "^9.2.1"
+  }
+}
