@@ -4,6 +4,9 @@
   "main": "index.js",
   "author": "drlappiess",
   "license": "MIT",
+  "scripts": {
+    "compile": "node ./scripts/compile.js"
+  },
   "dependencies": {
     "@truffle/hdwallet-provider": "^2.0.3",
     "dotenv": "^16.0.0",
