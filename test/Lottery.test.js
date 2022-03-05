@@ -20,4 +20,17 @@ describe("Lottery", () => {
     it("Contract has an address? ", () => {
         assert.ok(contract.options.address)
     })
+
+    it("Player can enter the lottery? ", async () => {
+        await contract.methods.enterLottery().send({ from: accounts[0], gas: "1000000", value: "10000000000000000" })
+        const players = await contract.methods.getPlayers().call()
+        const isPlayerJoined = players.includes(accounts[0])
+        assert.equal(isPlayerJoined, true)
+    })
+
+    it("Contract can generate a random unsigned interger", async () => {
+        const rand = await contract.methods.random().call()
+        const isRandUint = Number.isInteger(parseInt(rand)) && parseInt(rand) > 0
+        assert.equal(isRandUint, true)
+    })
 })
