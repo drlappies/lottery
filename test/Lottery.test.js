@@ -33,4 +33,23 @@ describe("Lottery", () => {
         const isRandUint = Number.isInteger(parseInt(rand)) && parseInt(rand) > 0
         assert.equal(isRandUint, true)
     })
+
+    it("Prize pool can receive ether", async () => {
+        await contract.methods.enterLottery().send({ from: accounts[1], gas: "1000000", value: "10000000000000000" });
+        const contractBalance = await web3.eth.getBalance(contract.options.address)
+
+        const hasContractReceivedEntry = contractBalance === "10000000000000000";
+        assert.equal(hasContractReceivedEntry, true)
+    })
+
+    it("Is Prize Pool sent out", async () => {
+        await contract.methods.enterLottery().send({ from: accounts[1], gas: "1000000", value: "10000000000000000" })
+        await contract.methods.pickWinner().send({ from: accounts[0], gas: "1000000" });
+
+        const contractBalance = await web3.eth.getBalance(contract.options.address);
+
+        const isContractPoolClear = contractBalance === "0";
+
+        assert.equal(isContractPoolClear, true)
+    })
 })
