@@ -49,7 +49,13 @@ describe("Lottery", () => {
         const contractBalance = await web3.eth.getBalance(contract.options.address);
 
         const isContractPoolClear = contractBalance === "0";
-
         assert.equal(isContractPoolClear, true)
+    })
+
+    it("Is Players reset", async () => {
+        await contract.methods.enterLottery().send({ from: accounts[1], gas: "1000000", value: "10000000000000000" })
+        await contract.methods.pickWinner().send({ from: accounts[0], gas: "1000000" });
+        const players = await contract.methods.getPlayers().call()
+        assert.equal(players.length, 0)
     })
 })
