@@ -41,6 +41,15 @@ describe("Lottery", () => {
         assert.equal(3, players.length)
     })
 
+    it("Contract requires a minimum amount of eth to enter? ", async () => {
+        try {
+            await contract.methods.enter().send({ from: accounts[0], gas: "1000000", value: "0" });
+            assert(false)
+        } catch (error) {
+            assert(error)
+        }
+    })
+
     it("Contract can generate a random unsigned interger", async () => {
         const rand = await contract.methods.random().call()
         const isRandUint = Number.isInteger(parseInt(rand)) && parseInt(rand) > 0
