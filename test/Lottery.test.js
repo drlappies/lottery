@@ -28,6 +28,19 @@ describe("Lottery", () => {
         assert.equal(isPlayerJoined, true)
     })
 
+    it("Multiple players can enter the lottery? ", async () => {
+        await contract.methods.enterLottery().send({ from: accounts[1], gas: "1000000", value: "10000000000000000" })
+        await contract.methods.enterLottery().send({ from: accounts[2], gas: "1000000", value: "10000000000000000" })
+        await contract.methods.enterLottery().send({ from: accounts[3], gas: "1000000", value: "10000000000000000" })
+
+        const players = await contract.methods.getPlayers().call({ from: accounts[0] })
+
+        assert.equal(accounts[1], players[0])
+        assert.equal(accounts[2], players[1])
+        assert.equal(accounts[3], players[2])
+        assert.equal(3, players.length)
+    })
+
     it("Contract can generate a random unsigned interger", async () => {
         const rand = await contract.methods.random().call()
         const isRandUint = Number.isInteger(parseInt(rand)) && parseInt(rand) > 0
