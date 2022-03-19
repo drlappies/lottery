@@ -6,14 +6,15 @@
   "license": "MIT",
   "scripts": {
     "compile": "node ./scripts/compile.js",
+    "deploy": "node ./scripts/deploy.js",
     "test": "mocha"
   },
   "dependencies": {
     "@truffle/hdwallet-provider": "^2.0.3",
     "dotenv": "^16.0.0",
     "ganache": "^7.0.2",
+    "mocha": "^9.2.1",
     "solc": "^0.8.12",
-    "web3": "^1.7.0",
-    "mocha": "^9.2.1"
+    "web3": "^1.7.0"
   }
 }
